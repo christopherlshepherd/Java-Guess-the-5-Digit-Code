@@ -1,0 +1,39 @@
+import java.util.Scanner;
+import java.util.Random;
+class Main {
+	public static void main (String[] args) {
+		Scanner kb = new Scanner (System.in);
+		Random r = new Random();
+		int ans = (r.nextInt(99999));
+		while (ans<10000)
+			ans = ans*10;
+		int chances = 10;
+		while (chances > 0) {
+			System.out.println("Please make a guess at a 5-digit code.");
+			int guess = kb.nextInt();
+			int copy = ans;
+			int numbcorrect=0;
+			int sum = 0;
+
+			for (int i=0;i<5;i++) {
+				if (guess%10==copy%10) {
+					numbcorrect++;
+					sum = sum + guess%10;
+				}
+				guess = guess/10;
+				copy = copy/10;
+			}
+			if (numbcorrect==5) {
+				System.out.println("you got them all correct!");
+				chances = 0;
+				break;
+			}
+			System.out.println("You got "+ numbcorrect +" correct, and their sum is "+sum);
+			chances--;
+			System.out.println("You have "+ chances+" chances left.");
+		}
+		
+		System.out.println("The answer was "+ans);
+		kb.close();
+	}
+}
